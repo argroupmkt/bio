@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AR GROUP MKT – Estratégia que move resultados</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    /* Reset e tipografia */
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg-dark); color: var(--secondary-color); line-height: 1.6; }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    /* Cores da identidade visual */
+    :root {
+      --primary-color: #c2a154;    /* Dourado do logo */
+      --secondary-color: #b0b2b5;  /* Cinza um pouco mais claro para texto */
+      --text-dark: #1f1f1f;       /* Cor para texto escuro em fundo claro */
+      --bg-dark: #2b2b2b;          /* Fundo escuro do logo */
+      --bg-light: #3a3a3a;         /* Tom de contraste para cards */
+      --bg-lighter: #4a4a4a;      /* Tom ainda mais claro para contraste sutil */
+    }
+
+    /* Container */
+    .container { width: 90%; max-width: 1200px; margin: 0 auto; }
+
+    /* Header e Navegação */
+    header {
+      background: rgba(43, 43, 43, 0.95);
+      padding: 15px 0;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+    }
+    header .container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { height: 40px; }
+    nav ul { list-style: none; display: flex; }
+    nav ul li { margin-left: 30px; }
+    nav ul li a { color: var(--secondary-color); font-weight: bold; transition: color 0.3s ease; position: relative; padding-bottom: 5px; }
+    nav ul li a:hover { color: var(--primary-color); }
+    nav ul li a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 50%; transform: translateX(-50%); background-color: var(--primary-color); transition: width 0.3s ease-out; }
+    nav ul li a:hover::after { width: 100%; }
+
+    /* Botões */
+    .btn { display: inline-block; background: var(--primary-color); color: var(--text-dark); padding: 12px 25px; border-radius: 6px; font-weight: bold; transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(0,0,0,0.3); border: none; cursor: pointer; }
+    .btn:hover { background: #d4b265; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0,0,0,0.4); }
+
+    /* Hero */
+    .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto-format&fit=crop&w=1950&q=80') center/cover no-repeat; background-attachment: fixed; padding-top: 80px; }
+    .hero h1 { font-size: 3.5rem; margin-bottom: 20px; color: var(--primary-color); text-shadow: 2px 2px 5px #000; font-weight: 900; }
+    .hero p { font-size: 1.4rem; margin-bottom: 30px; color: #fff; max-width: 800px; }
+
+    /* Seções */
+    section { padding: 80px 0; }
+    section:nth-of-type(odd):not(.hero) { background: var(--bg-light); }
+    section h2 { font-size: 2.8rem; color: var(--primary-color); margin-bottom: 40px; text-align: center; text-shadow: 1px 1px 3px #000; font-weight: 700; }
+    section p.section-subtitle { font-size: 1.2rem; text-align: center; max-width: 800px; margin: -20px auto 40px auto; color: var(--secondary-color); }
+
+    /* Sobre Nós */
+    .about .container {
+        padding: 40px;
+        background: var(--bg-dark);
+        box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+        border-radius: 10px;
+        text-align: center;
+    }
+    .story-content {
+        max-width: 800px;
+        margin: 0 auto 50px auto;
+        text-align: left;
+        font-size: 1.1rem;
+        line-height: 1.7;
+    }
+    .story-content p {
+        margin-bottom: 1.2em;
+        text-align: justify;
+    }
+    .story-content .highlight {
+        text-align: center;
+        font-size: 1.2rem;
+        color: var(--primary-color);
+        margin-top: 30px;
+        padding: 15px;
+        border-top: 1px solid var(--bg-lighter);
+        border-bottom: 1px solid var(--bg-lighter);
+    }
+    .mvv-grid {
+        display: flex;
+        justify-content: space-between;
+        gap: 30px;
+        flex-wrap: wrap;
+        margin-top: 40px;
+    }
+    .mvv-card {
+        flex: 1;
+        min-width: 300px;
+        background: var(--bg-light);
+        padding: 30px;
+        border-radius: 8px;
+        text-align: center;
+        border: 1px solid var(--bg-lighter);
+    }
+    .mvv-icon {
+        font-size: 2.5rem;
+        color: var(--primary-color);
+        margin-bottom: 15px;
+    }
+    .mvv-card h3 {
+        color: #fff;
+        margin-bottom: 15px;
+        font-size: 1.5rem;
+    }
+    .mvv-card p, .mvv-card ul {
+        color: var(--secondary-color);
+        font-size: 1rem;
+    }
+    .mvv-card ul {
+        list-style: none;
+        padding: 0;
+        text-align: left;
+        display: inline-block;
+    }
+    .mvv-card ul li {
+        margin-bottom: 10px;
+    }
+    .mvv-card ul li i {
+        color: var(--primary-color);
+        margin-right: 10px;
+    }
+
+    /* Seção de Resultados (Números Animados) */
+    .stats-grid { display: flex; justify-content: space-around; text-align: center; flex-wrap: wrap; gap: 20px; }
+    .stat-item { flex: 1; min-width: 200px; }
+    .stat-item .stat-number { font-size: 3.5rem; font-weight: 900; color: var(--primary-color); }
+    .stat-item p { font-size: 1.2rem; color: var(--secondary-color); margin-top: 5px; }
+
+    /* Serviços */
+    .services-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; }
+    .service-card { background: var(--bg-dark); flex: 1 1 280px; max-width: 300px; padding: 30px 20px; border-radius: 10px; text-align: center; transition: transform 0.3s, box-shadow 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.3); border: 1px solid var(--bg-lighter); }
+    .service-card:hover { transform: translateY(-10px); box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+    .service-card i { font-size: 2.8rem; margin-bottom: 20px; color: var(--primary-color); }
+    .service-card h3 { margin-bottom: 15px; font-size: 1.4rem; color: var(--primary-color); }
+    .service-card p { font-size: 1rem; color: var(--secondary-color); }
+    
+    /* Passo a Passo */
+    .steps-grid { display: flex; justify-content: center; align-items: flex-start; flex-wrap: wrap; gap: 30px; position: relative; }
+    .step-card { background: var(--bg-dark); flex: 1 1 250px; max-width: 280px; padding: 30px; border-radius: 10px; text-align: center; border: 1px solid var(--bg-lighter); box-shadow: 0 4px 15px rgba(0,0,0,0.3); position: relative; }
+    .step-number { position: absolute; top: -25px; left: 50%; transform: translateX(-50%); background-color: var(--primary-color); color: var(--text-dark); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700; border: 3px solid var(--bg-light); }
+    .step-card h3 { font-size: 1.3rem; margin-top: 30px; color: var(--primary-color); }
+    .step-card p { font-size: 1rem; color: var(--secondary-color); }
+
+    /* Depoimentos */
+    .testimonials-grid { display: flex; justify-content: center; flex-wrap: wrap; gap: 30px; }
+    .testimonial-card { background: var(--bg-dark); flex: 1 1 300px; max-width: 350px; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); border-left: 5px solid var(--primary-color); }
+    .testimonial-card .stars { color: #FFD700; margin-bottom: 15px; font-size: 1.1rem; }
+    .testimonial-card .quote { font-style: italic; color: var(--secondary-color); margin-bottom: 20px; }
+    .testimonial-card .author { font-weight: bold; color: #fff; text-align: right; }
+    .testimonial-card .author span { display: block; font-weight: normal; font-size: 0.9rem; color: var(--secondary-color); }
+
+    /* Contato */
+    .contact .container { border-radius: 10px; padding: 60px 40px; background: var(--bg-light); box-shadow: 0 5px 20px rgba(0,0,0,0.5); }
+    .contact form { max-width: 500px; margin: 0 auto; display: flex; flex-direction: column; gap: 15px; }
+    .contact input, .contact textarea { padding: 12px; border-radius: 6px; border: 1px solid var(--bg-lighter); font-size: 1rem; background: var(--bg-dark); color: var(--secondary-color); transition: border-color 0.3s ease; }
+    .contact input:focus, .contact textarea:focus { outline: none; border-color: var(--primary-color); box-shadow: 0 0 0 3px rgba(194, 161, 84, 0.3); }
+    .contact textarea { resize: vertical; min-height: 120px; }
+    .contact a { color: var(--primary-color); transition: color 0.3s; }
+    .contact a:hover { color: #d4b265; }
+    .contact .contact-info p { margin-top: 15px; font-size: 1.1rem; }
+
+    /* Footer */
+    footer { background: #111; padding: 40px 0; text-align: center; font-size: 0.9rem; color: #ccc; }
+    .social-links { margin-bottom: 20px; }
+    .social-links a { color: #ccc; font-size: 1.8rem; margin: 0 15px; transition: color 0.3s; }
+    .social-links a:hover { color: var(--primary-color); }
+
+    /* Botão Flutuante WhatsApp */
+    .whatsapp-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary-color); color: var(--text-dark); width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 2.2rem; box-shadow: 0 5px 15px rgba(0,0,0,0.4); z-index: 999; transition: all 0.3s ease; animation: pulse 1.5s infinite; }
+    .whatsapp-btn:hover { background: #d4b265; transform: scale(1.05); box-shadow: 0 8px 20px rgba(0,0,0,0.6); animation: none; }
+    @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(194, 161, 84, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(194, 161, 84, 0); } 100% { box-shadow: 0 0 0 0 rgba(194, 161, 84, 0); } }
+
+    /* Animações */
+    .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+    .fade-in.appear { opacity: 1; transform: translateY(0); }
+    
+    /* Responsivo */
+    @media(max-width:900px){
+        nav ul { display: none; }
+        header .container { justify-content: center; }
+        .hero h1{ font-size:2.8rem; }
+        .service-card { flex-basis: 45%; }
+        .whatsapp-btn { bottom: 20px; right: 20px; width: 55px; height: 55px; font-size: 2rem; }
+    }
+    @media(max-width:768px){
+        .service-card, .step-card, .testimonial-card, .stat-item, .mvv-card { flex-basis: 100%; max-width: 400px; }
+        section { padding: 60px 15px; }
+        section h2 { font-size: 2.2rem; }
+        .about .container, .contact .container { padding: 30px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <a href="#" aria-label="AR Group MKT Logo">
+        <img src="https://res.cloudinary.com/dwu4r8y1a/image/upload/v1759726092/picsart_25-10-05_23-57-21-348_k32bua.png" alt="AR Group MKT Logo" class="logo">
+      </a>
+      <nav>
+        <ul>
+          <li><a href="#about">Sobre</a></li>
+          <li><a href="#services">Serviços</a></li>
+          <li><a href="#passo-a-passo">Como Funciona</a></li>
+          <li><a href="#depoimentos">Depoimentos</a></li>
+          <li><a href="#contact">Contato</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h1 class="fade-in">AR GROUP MKT</h1>
+    <p class="fade-in">Estratégia que move resultados.</p>
+    <p class="fade-in"><em>Quando você achar diferente, pode ter certeza que é da gente.</em></p>
+    <a href="#contact" class="btn fade-in">Vamos transformar sua marca</a>
+  </section>
+
+  <section id="about" class="about">
+    <div class="container fade-in">
+      <h2>Nossa História</h2>
+      <div class="story-content">
+        <p>A AR GROUP MKT nasceu de uma inquietação. Cansados de ver no mercado um marketing repetitivo, baseado em fórmulas prontas e promessas vazias, decidimos que era hora de fazer diferente. Vimos marcas incríveis com potencial desperdiçado por estratégias que não conectavam, não humanizavam e, principalmente, não geravam resultados reais.</p>
+        <p>Acreditamos que marketing é mais do que números e algoritmos; é sobre pessoas, histórias e impacto. Fundamos a AR com um propósito claro: ser a agência que enxerga a alma de cada negócio e a traduz em estratégias que movem. Movem o ponteiro das vendas, movem a percepção do público e movem os sonhos dos empreendedores que confiam em nós.</p>
+        <p class="highlight">Por isso, nosso lema é mais que uma frase, é a nossa essência: <em>"Quando você achar diferente, pode ter certeza que é da gente."</em></p>
+      </div>
+
+      <div class="mvv-grid">
+        <div class="mvv-card fade-in">
+          <div class="mvv-icon"><i class="fas fa-rocket"></i></div>
+          <h3>Nossa Missão</h3>
+          <p>Impulsionar marcas através de estratégias de marketing criativas e humanizadas, transformando ideias em resultados concretos e duradouros.</p>
+        </div>
+        <div class="mvv-card fade-in">
+          <div class="mvv-icon"><i class="fas fa-eye"></i></div>
+          <h3>Nossa Visão</h3>
+          <p>Ser referência nacional em marketing de performance que não abre mão da autenticidade, provando que é possível unir estratégia, criatividade e resultado.</p>
+        </div>
+        <div class="mvv-card fade-in">
+          <div class="mvv-icon"><i class="fas fa-gem"></i></div>
+          <h3>Nossos Valores</h3>
+          <ul>
+            <li><i class="fas fa-check"></i> Parceria Real</li>
+            <li><i class="fas fa-check"></i> Estratégia Acima de Tudo</li>
+            <li><i class="fas fa-check"></i> Transparência Total</li>
+            <li><i class="fas fa-check"></i> Paixão por Resultados</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="resultados" class="resultados">
+    <div class="container fade-in">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <span class="stat-number" data-target="40">0</span>+
+                <p>Projetos Entregues</p>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" data-target="97">0</span>%
+                <p>de Clientes Satisfeitos</p>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" data-target="500">0</span>+
+                <p>Cafés Tomados</p>
+            </div>
+        </div>
+    </div>
+  </section>
+
+  <section id="services" class="services">
+    <div class="container">
+      <h2 class="fade-in">Nossos Serviços</h2>
+      <div class="services-grid">
+          <div class="service-card fade-in">
+            <i class="fas fa-bullseye"></i>
+            <h3>Marketing Estratégico</h3>
+            <p>Planejamos campanhas que realmente funcionam, conectando sua marca ao público certo.</p>
+          </div>
+          <div class="service-card fade-in">
+            <i class="fas fa-chart-line"></i>
+            <h3>Tráfego Pago</h3>
+            <p>Investimos cada real de forma inteligente para gerar leads e vendas de verdade.</p>
+          </div>
+          <div class="service-card fade-in">
+            <i class="fas fa-palette"></i>
+            <h3>Branding & Identidade</h3>
+            <p>Criamos marcas únicas, com personalidade, que chamam atenção e ficam na memória.</p>
+          </div>
+          <div class="service-card fade-in">
+            <i class="fas fa-share-nodes"></i>
+            <h3>Gestão de Redes Sociais</h3>
+            <p>Criamos e gerenciamos conteúdos que engajam e transformam seguidores em clientes.</p>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="passo-a-passo" class="passo-a-passo">
+    <div class="container">
+      <h2 class="fade-in">Como Funciona?</h2>
+      <p class="section-subtitle fade-in">Nosso processo é simples, transparente e focado no seu sucesso.</p>
+      <div class="steps-grid">
+        <div class="step-card fade-in">
+          <div class="step-number">1</div>
+          <h3>Contato Inicial</h3>
+          <p>Você nos conta seu desafio. Entendemos suas metas e o que você precisa para decolar.</p>
+        </div>
+        <div class="step-card fade-in">
+          <div class="step-number">2</div>
+          <h3>Diagnóstico e Proposta</h3>
+          <p>Analisamos seu mercado e preparamos uma proposta estratégica e sob medida para você.</p>
+        </div>
+        <div class="step-card fade-in">
+          <div class="step-number">3</div>
+          <h3>Aprovação e Onboarding</h3>
+          <p>Com a proposta aprovada, alinhamos os detalhes e mergulhamos de cabeça no seu projeto.</p>
+        </div>
+        <div class="step-card fade-in">
+          <div class="step-number">4</div>
+          <h3>Execução e Resultados</h3>
+          <p>Mãos à obra! Executamos, monitoramos e otimizamos o plano para o seu sucesso contínuo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="depoimentos" class="depoimentos">
+    <div class="container">
+      <h2 class="fade-in">O que nossos clientes dizem</h2>
+      <div class="testimonials-grid">
+        <div class="testimonial-card fade-in">
+          <div class="stars">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+          </div>
+          <p class="quote">"A AR Group MKT transformou nossa presença online! O branding ficou incrível e o número de agendamentos aumentou significativamente. Profissionalismo nota mil!"</p>
+          <p class="author">Maria Júlia <span>Estética Avançada</span></p>
+        </div>
+        <div class="testimonial-card fade-in">
+          <div class="stars">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+          </div>
+          <p class="quote">"Serviço sério e estratégico. Entenderam as restrições da minha área e entregaram um marketing digital ético e com resultados reais. Recomendo."</p>
+          <p class="author">Ricardo Alves <span>Advocacia</span></p>
+        </div>
+        <div class="testimonial-card fade-in">
+          <div class="stars">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+          </div>
+          <p class="quote">"Eles realmente 'fazem diferente'. Nossa gestão de redes sociais nunca foi tão boa. O engajamento cresceu e as vendas acompanharam. Equipe fantástica!"</p>
+          <p class="author">Fernanda Lima <span>Moda & E-commerce</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="container fade-in">
+      <h2>Entre em Contato</h2>
+      <p class="section-subtitle">Pronto para fazer diferente? Vamos conversar sobre o seu projeto.</p>
+      <form action="https://formspree.io/f/movklpjr" method="POST">
+        <input type="text" name="nome" placeholder="Seu nome" required>
+        <input type="email" name="email" placeholder="Seu e-mail" required>
+        <textarea name="mensagem" placeholder="Conte-nos sobre seu desafio ou projeto" required></textarea>
+        <button type="submit" class="btn">Enviar mensagem</button>
+      </form>
+      <div class="contact-info">
+        <p style="margin-top: 40px;">Ou fale conosco diretamente:</p>
+        <p>📩 <a href="mailto:contatoargroupmkt@gmail.com">contatoargroupmkt@gmail.com</a></p>
+        <p>📲 <a href="https://wa.me/5565981041009" target="_blank">+55 65 98104-1009</a></p>
+        <p>📍 Cuiabá – MT</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+        <div class="social-links">
+            <a href="https://www.instagram.com/argroupmkt" target="_blank" aria-label="Instagram da AR Group MKT"><i class="fab fa-instagram"></i></a>
+            <a href="https://wa.me/5565981041009" target="_blank" aria-label="WhatsApp da AR Group MKT"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        &copy; 2025 AR GROUP MKT – Todos os direitos reservados.
+    </div>
+  </footer>
+
+  <a href="https://wa.me/5565981041009" class="whatsapp-btn" target="_blank" aria-label="Fale conosco via WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <script>
+    // Animação de Fade-in ao rolar
+    const faders = document.querySelectorAll('.fade-in');
+    const fadersOptions = { threshold: 0.2, rootMargin: "0px 0px -50px 0px" };
+    const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('appear');
+        observer.unobserve(entry.target);
+      });
+    }, fadersOptions);
+    faders.forEach(fader => appearOnScroll.observe(fader));
+
+    // Animação de contagem de números
+    const statsSection = document.getElementById('resultados');
+    const statNumbers = document.querySelectorAll('.stat-number');
+    const animationDuration = 2000; // 2 segundos
+
+    const countUp = (el) => {
+      const target = parseInt(el.dataset.target, 10);
+      let current = 0;
+      const increment = target / (animationDuration / 16); // ~60fps
+
+      const updateCount = () => {
+        current += increment;
+        if (current >= target) {
+          el.innerText = target;
+          clearInterval(timer);
+        } else {
+          el.innerText = Math.ceil(current);
+        }
+      };
+      const timer = setInterval(updateCount, 16);
+    };
+
+    const statsObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          statNumbers.forEach(countUp);
+          observer.unobserve(entry.target); // Anima apenas uma vez
+        }
+      });
+    }, { threshold: 0.5 });
+
+    if(statsSection) {
+      statsObserver.observe(statsSection);
+    }
+  </script>
+</body>
+</html>
